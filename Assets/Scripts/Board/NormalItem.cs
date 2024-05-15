@@ -22,6 +22,46 @@ public class NormalItem : Item
         ItemType = type;
     }
 
+    public override void SetView()
+    {
+        base.SetView();
+        ReSkinItem();
+    }
+
+    private void ReSkinItem()
+    {
+        NormalItemSkin m_normalItemSkin = Resources.Load<NormalItemSkin>(Constants.NORMAL_ITEM_SKIN);
+        var spriteRenderer = View.GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer == null)
+            return;
+
+        switch (ItemType)
+        {
+            case eNormalType.TYPE_ONE:
+                spriteRenderer.sprite = m_normalItemSkin.SkinOne;
+                break;
+            case eNormalType.TYPE_TWO:
+                spriteRenderer.sprite = m_normalItemSkin.SkinTwo;
+                break;
+            case eNormalType.TYPE_THREE:
+                spriteRenderer.sprite = m_normalItemSkin.SkinThree;
+                break;
+            case eNormalType.TYPE_FOUR:
+                spriteRenderer.sprite = m_normalItemSkin.SkinFour;
+                break;
+            case eNormalType.TYPE_FIVE:
+                spriteRenderer.sprite = m_normalItemSkin.SkinFive;
+                break;
+            case eNormalType.TYPE_SIX:
+                spriteRenderer.sprite = m_normalItemSkin.SkinSix;
+                break;
+            case eNormalType.TYPE_SEVEN:
+                spriteRenderer.sprite = m_normalItemSkin.SkinSeven;
+                break;
+        }
+    }
+
     protected override string GetPrefabName()
     {
         string prefabname = string.Empty;
