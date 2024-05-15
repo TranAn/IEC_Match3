@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,54 @@ public class NormalItem : Item
     public void SetType(eNormalType type)
     {
         ItemType = type;
+    }
+
+    public void SetMinimumTypeByNeiboughCell(Cell cell)
+    {
+        int[] typeArr = new int[Enum.GetNames(typeof(eNormalType)).Length];
+
+        Item itemUp = cell.NeighbourUp != null ? cell.NeighbourUp.Item : null;
+        Item itemBottom = cell.NeighbourBottom != null ? cell.NeighbourBottom.Item : null;
+        Item itemLeft = cell.NeighbourLeft != null ? cell.NeighbourLeft.Item : null;
+        Item itemRight = cell.NeighbourRight != null ? cell.NeighbourRight.Item : null;
+
+        if (itemUp != null && itemUp is NormalItem)
+        {
+            NormalItem normalItem = (NormalItem)itemUp;
+            int itemUpVal = (int)normalItem.ItemType;
+            typeArr[itemUpVal] = 1;
+        }
+
+        if (itemBottom != null && itemBottom is NormalItem)
+        {
+            NormalItem normalItem = (NormalItem)itemBottom;
+            int itemUpVal = (int)normalItem.ItemType;
+            typeArr[itemUpVal] = 1;
+        }
+
+        if (itemLeft != null && itemLeft is NormalItem)
+        {
+            NormalItem normalItem = (NormalItem)itemLeft;
+            int itemUpVal = (int)normalItem.ItemType;
+            typeArr[itemUpVal] = 1;
+        }
+
+        if (itemRight != null && itemRight is NormalItem)
+        {
+            NormalItem normalItem = (NormalItem)itemRight;
+            int itemUpVal = (int)normalItem.ItemType;
+            typeArr[itemUpVal] = 1;
+        }
+
+        for (int i = 0; i < typeArr.Length; i++)
+        {
+            if (typeArr[i] != 1)
+            {
+                int minimumItemVal = i;
+                ItemType = (eNormalType)minimumItemVal;
+                break;
+            }
+        }
     }
 
     public override void SetView()

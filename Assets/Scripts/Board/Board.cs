@@ -147,7 +147,8 @@ public class Board
 
                 NormalItem item = new NormalItem();
 
-                item.SetType(Utils.GetRandomNormalType());
+                //item.SetType(Utils.GetRandomNormalType());
+                item.SetMinimumTypeByNeiboughCell(cell);
                 item.SetView();
                 item.SetViewRoot(m_root);
 
